@@ -1,4 +1,6 @@
-package lessons_1_hw;
+package ru.geekbrains.main.site.lessons_1_hw.participants;
+
+import ru.geekbrains.main.site.lessons_1_hw.оbstacles.Barrier;
 
 public class Cat implements Move {
     private String name;

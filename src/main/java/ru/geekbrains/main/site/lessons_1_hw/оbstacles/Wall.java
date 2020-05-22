@@ -1,6 +1,6 @@
-package lessons_1_hw;
+package ru.geekbrains.main.site.lessons_1_hw.оbstacles;
 
-public class Wall implements Barrier{
+public class Wall implements Barrier {
     private final float height;
 
     public Wall(float height) {

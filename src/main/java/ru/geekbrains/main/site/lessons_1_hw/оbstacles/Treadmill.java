@@ -1,6 +1,6 @@
-package lessons_1_hw;
+package ru.geekbrains.main.site.lessons_1_hw.оbstacles;
 
-public class Treadmill implements Barrier{
+public class Treadmill implements Barrier {
     private final float distance;
 
     public Treadmill(float distance) {

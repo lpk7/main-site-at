@@ -1,4 +1,12 @@
-package lessons_1_hw;
+package ru.geekbrains.main.site.lessons_1_hw;
+
+import ru.geekbrains.main.site.lessons_1_hw.participants.Cat;
+import ru.geekbrains.main.site.lessons_1_hw.participants.Human;
+import ru.geekbrains.main.site.lessons_1_hw.participants.Move;
+import ru.geekbrains.main.site.lessons_1_hw.participants.Robot;
+import ru.geekbrains.main.site.lessons_1_hw.оbstacles.Barrier;
+import ru.geekbrains.main.site.lessons_1_hw.оbstacles.Treadmill;
+import ru.geekbrains.main.site.lessons_1_hw.оbstacles.Wall;
 
 public class Start {
     public static void main(String[] args) {
