@@ -19,6 +19,24 @@ public class Footer extends BaseTest {
     WebElement forBusiness = driver.findElement(By.cssSelector(".//a[text()='Компаниям']"));
     WebElement phone = driver.findElement(By.cssSelector("a[class='site-footer__phone']"));
     WebElement skolkovo = driver.findElement(By.cssSelector("a[class='icon-skolkovo']"));
+
+    static boolean footerSearch() {
+        boolean facebook = driver.findElement(By.cssSelector("svg[class$='icon-facebook_dark']")).isDisplayed();
+        boolean vk = driver.findElement(By.cssSelector("svg[class$='icon-vk']")).isDisplayed();
+        boolean instagram = driver.findElement(By.cssSelector("svg[class$='icon-instagram']")).isDisplayed();
+        boolean youtube = driver.findElement(By.cssSelector("svg[class$='icon-youtube']")).isDisplayed();
+        boolean telegram = driver.findElement(By.cssSelector("svg[class$='icon-telegram']")).isDisplayed();
+        boolean feedBacks = driver.findElement(By.cssSelector("a[href='/feedbacks']")).isDisplayed();
+        boolean help = driver.findElement(By.xpath(".//a[text()='Помощь']")).isDisplayed();
+        boolean company = driver.findElement(By.cssSelector("a[href='/company']")).isDisplayed();
+        boolean license = driver.findElement(By.cssSelector("a[href='/license.pdf']")).isDisplayed();
+        boolean career = driver.findElement(By.cssSelector("a[href='/career/682']")).isDisplayed();
+        boolean forBusiness = driver.findElement(By.xpath(".//a[text()='Компаниям']")).isDisplayed();
+        boolean phone = driver.findElement(By.cssSelector("a[class='site-footer__phone']")).isDisplayed();
+        boolean skolkovo = driver.findElement(By.cssSelector("svg[class$='icon-skolkovo']")).isDisplayed();
+        return facebook && vk && instagram && youtube && telegram && feedBacks && help && company && license && career
+                && forBusiness && phone && skolkovo;
+    }
 //    фейсбук .icon-facebook_dark
 //    вк .icon-vk
 //    инста .icon-instagram

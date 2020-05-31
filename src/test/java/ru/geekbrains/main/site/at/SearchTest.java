@@ -12,6 +12,10 @@ import ru.geekbrains.main.site.at.base.BaseTest;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
+
 public class SearchTest extends BaseTest {
 
 //        Перейти на сайт https://geekbrains.ru/courses
@@ -62,7 +66,7 @@ public class SearchTest extends BaseTest {
         WebElement blogsCount = driver.findElement(By.xpath("//h2[text()='Блоги']/following-sibling::ul/li/a/span"));
         WebElement forumCount = driver.findElement(By.xpath("//h2[text()='Форум']/following-sibling::ul/li/a/span"));
         WebElement testsCount = driver.findElement(By.xpath("//header/h2[text()='Тесты']/following-sibling::ul/li/a/span"));
-        //WebElement projectAndCompanyCount = driver.findElement(By.xpath(".//header/h2[text()='Проекты и компании']/following-sibling::ul/li/a/span"));
+        WebElement projectAndCompanyText = driver.findElement(By.cssSelector("div[class='company-item-wrapper'] h3 a"));
         WebElement firstEvent = driver.findElement(By.cssSelector("div[class^='event-item'] div[class^='text-left'] a"));
 
         List<WebElement> list = driver.findElements(By.cssSelector("div[class='company-item-wrapper']"));
@@ -74,15 +78,15 @@ public class SearchTest extends BaseTest {
 
         MatcherAssert.assertThat(Integer.valueOf(professionsCount.getText()), Matchers.greaterThanOrEqualTo(2));
         MatcherAssert.assertThat(Integer.valueOf(coursesCount.getText()), Matchers.greaterThan(15));
-        MatcherAssert.assertThat(Integer.valueOf(eventsCount.getText()), Matchers.greaterThan(180));
+        MatcherAssert.assertThat(Integer.valueOf(eventsCount.getText()),
+                allOf(
+                        Matchers.greaterThan(180),
+                        Matchers.lessThan(300)));
         MatcherAssert.assertThat(Integer.valueOf(eventsCount.getText()), Matchers.lessThan(300));
         Assertions.assertEquals("Java Junior. Что нужно знать для успешного собеседования?", firstEvent.getText());
         MatcherAssert.assertThat(Integer.valueOf(blogsCount.getText()), Matchers.greaterThan(300));
         MatcherAssert.assertThat(Integer.valueOf(forumCount.getText()), Matchers.greaterThanOrEqualTo(350));
         MatcherAssert.assertThat(Integer.valueOf(testsCount.getText()), Matchers.not(0));
         Assertions.assertTrue(containGeekbrains);
-
-//      Более короткий, но притянутый за уши, вариант проверки наличия GeekBrains в проектах и компаниях
-//      WebElement companies = driver.findElement(By.cssSelector("div[class='company-item-wrapper'] * [alt$='GeekBrains']"));
     }
 }
