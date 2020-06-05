@@ -1,15 +1,16 @@
 package ru.geekbrains.main.site.at.site;
 
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import ru.geekbrains.main.site.at.base.BaseTest;
+import ru.geekbrains.main.site.at.base.SearchBaseTest;
 import ru.geekbrains.main.site.at.page.SearchPage;
 
 import java.util.stream.Stream;
-
-public class SearchTest extends BaseTest {
+@Feature("Поиск")
+public class SearchTest extends SearchBaseTest {
 
     static SearchPage searchPage;
 

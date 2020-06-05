@@ -12,6 +12,9 @@ public class HomePage {
     @FindBy(css = "h2[class=\"gb-header__title\"]")
     private WebElement textNamePage;
 
+    @FindBy(xpath = "//div[@data-testid=\"promocode-banner-container\"]//..//button[2]")
+    private WebElement buttonPopUpClosed;
+
     private final Navigation navigation;
     private final WebDriver driver;
 
@@ -30,5 +33,10 @@ public class HomePage {
 
     public Navigation getNavigation() {
         return navigation;
+    }
+
+    public HomePage closedPopUp() {
+        this.buttonPopUpClosed.click();
+        return this;
     }
 }
