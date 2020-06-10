@@ -1,5 +1,6 @@
 package ru.geekbrains.main.site.at.block;
 
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -53,10 +54,19 @@ public class Footer {
         PageFactory.initElements(driver, this);
     }
 
-    public boolean footerSearch() {
-        return facebook.isDisplayed() && vk.isDisplayed() && instagram.isDisplayed() && youtube.isDisplayed()
-                && telegram.isDisplayed() && feedBacks.isDisplayed() && help.isDisplayed() && company.isDisplayed()
-                && license.isDisplayed() && career.isDisplayed() && forBusiness.isDisplayed() && phone.isDisplayed()
-                && skolkovo.isDisplayed();
+    public void footerSearch() {
+        Assertions.assertTrue(facebook.isDisplayed());
+        Assertions.assertTrue(vk.isDisplayed());
+        Assertions.assertTrue(instagram.isDisplayed());
+        Assertions.assertTrue(youtube.isDisplayed());
+        Assertions.assertTrue(telegram.isDisplayed());
+        Assertions.assertTrue(feedBacks.isDisplayed());
+        Assertions.assertTrue(help.isDisplayed());
+        Assertions.assertTrue(company.isDisplayed());
+        Assertions.assertTrue(license.isDisplayed());
+        Assertions.assertTrue(career.isDisplayed());
+        Assertions.assertTrue(forBusiness.isDisplayed());
+        Assertions.assertTrue(phone.isDisplayed());
+        Assertions.assertTrue(skolkovo.isDisplayed());
     }
 }

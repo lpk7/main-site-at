@@ -1,5 +1,6 @@
 package ru.geekbrains.main.site.at.block;
 
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -26,8 +27,10 @@ public class Header {
         PageFactory.initElements(driver, this);
     }
 
-    public boolean headerSearch() {
-        return headerName.isDisplayed() && buttonSearch.isDisplayed()
-                && login.isDisplayed() && registration.isDisplayed();
+    public void headerSearch() {
+        Assertions.assertTrue(headerName.isDisplayed());
+        Assertions.assertTrue(buttonSearch.isDisplayed());
+        Assertions.assertTrue(login.isDisplayed());
+        Assertions.assertTrue(registration.isDisplayed());
     }
 }

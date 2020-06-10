@@ -12,8 +12,8 @@ import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    public static WebDriver driver;
-    public static WebDriverWait wait10Second;
+    protected WebDriver driver;
+    protected WebDriverWait wait10Second;
 
     @BeforeEach
     void before() {
