@@ -1,5 +1,6 @@
 package ru.geekbrains.main.site.at.page;
 
+import io.qameta.allure.Step;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
@@ -80,7 +81,7 @@ public class SearchPage {
         inputSearch.sendKeys(name);
         return this;
     }
-
+    @Step("Проверка блока '{name}'")
     public SearchPage checkSearchPage(String name) {
         switch (name) {
             case "Профессии": {
