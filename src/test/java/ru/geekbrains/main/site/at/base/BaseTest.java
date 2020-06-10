@@ -14,8 +14,8 @@ import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    protected static WebDriver driver;
-    protected static WebDriverWait wait10Second;
+    public static WebDriver driver;
+    public static WebDriverWait wait10Second;
 
     @BeforeAll
     static void before() {
@@ -29,12 +29,13 @@ public class BaseTest {
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
 
-        driver.get("https://geekbrains.ru/courses");
+        driver.get("https://geekbrains.ru/career");
 
         wait10Second = new WebDriverWait(driver, 10);
     }
 
     @AfterAll
-    static void after() {driver.quit();
+    static void after() {
+        driver.quit();
     }
 }
