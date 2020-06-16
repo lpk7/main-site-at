@@ -1,52 +1,41 @@
 package ru.geekbrains.main.site.at.site;
 
 import io.qameta.allure.Feature;
-import org.junit.jupiter.api.BeforeAll;
+import io.qameta.allure.Story;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-import ru.geekbrains.main.site.at.base.SearchBaseTest;
-import ru.geekbrains.main.site.at.page.SearchPage;
+import org.junit.jupiter.api.Test;
+import ru.geekbrains.main.site.at.base.BeforeAndAfterStep;
+import ru.geekbrains.main.site.at.block.SearchTabsBlock;
+import ru.geekbrains.main.site.at.page.content.TestPage;
 
-import java.util.stream.Stream;
+import java.util.concurrent.TimeUnit;
+
+import static org.hamcrest.Matchers.*;
+
 @Feature("Поиск")
-public class SearchTest extends SearchBaseTest {
+@Story("Проверка отображения блоков")
+public class SearchTest extends BeforeAndAfterStep {
 
-    static SearchPage searchPage;
-
-    @BeforeAll
-    static void beforeSearch() {
-        searchPage = new SearchPage(driver).search("java");
+    @BeforeEach
+    void beforeSearchTest() {
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    static Stream<String> stringProvider() {
-        return Stream.of(
-                "Профессии",
-                "Курсы",
-                "Вебинары",
-                "Блоги",
-                "Форум",
-                "Тесты",
-                "Проекты и компании");
-    }
 
-    @DisplayName("Проверка результатов поиска")
-    @ParameterizedTest(name = "{index} => Проверка раздела: {0}")
-    @MethodSource("stringProvider")
-    void events(String name) {
-        searchPage.checkSearchPage(name);
+    @DisplayName("Проверка количества контента")
+    @Test
+    void searchTest() {
+        new TestPage(driver)
+                .openUrl()
+                .getHeader()
+                .searchText("java")
+                .getSearchTabsBlock()
+                .checkCount(SearchTabsBlock.Tab.Professions, greaterThanOrEqualTo(2))
+                .checkCount(SearchTabsBlock.Tab.Courses, greaterThan(15))
+                .checkCount(SearchTabsBlock.Tab.Webinars, allOf(greaterThan(180), lessThan(300)))
+                .checkCount(SearchTabsBlock.Tab.Blogs, greaterThan(300))
+                .checkCount(SearchTabsBlock.Tab.Forums, not(350))
+                .checkCount(SearchTabsBlock.Tab.Tests, not(0));
     }
-    //        Перейти на сайт https://geekbrains.ru/courses
-//        Нажать на кнопку Поиск
-//        В поле Поиск ввести текст: java
-//        Проверить что отобразились блоки и в них:
-//        Профессий не менее чем 2
-//        Курсов более 15
-//        Вебинаров больше чем 180, но меньше 300
-//        В вебинарах отображается первым “Java Junior. Что нужно знать для успешного собеседования?”
-//        Блогов более 300
-//        Форумов не 350
-//        Тестов не 0
-//        В Проектах и компаниях отображается GeekBrains
 }
-

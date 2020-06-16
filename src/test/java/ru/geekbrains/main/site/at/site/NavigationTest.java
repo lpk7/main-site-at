@@ -1,81 +1,64 @@
 package ru.geekbrains.main.site.at.site;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import ru.geekbrains.main.site.at.base.BaseTest;
-import ru.geekbrains.main.site.at.block.Footer;
-import ru.geekbrains.main.site.at.block.Header;
-import ru.geekbrains.main.site.at.page.HomePage;
-
+import ru.geekbrains.main.site.at.base.BeforeAndAfterStep;
+import ru.geekbrains.main.site.at.block.FooterBlock;
+import ru.geekbrains.main.site.at.page.content.TestPage;
 
 import java.util.stream.Stream;
 
-@Feature ("Навигация")
-@DisplayName("Проверка навигации, хедера и футера")
-public class NavigationTest extends BaseTest {
+import static ru.geekbrains.main.site.at.block.LeftNavigation.Button;
 
-    @Step("Нажатие кнопки '{name}'")
-    public static Stream<String> stringProviderNotPopUp() {
+@Feature("Навигация")
+@Story("Переход на страницы")
+@DisplayName("Переход на страницы")
+public class NavigationTest extends BeforeAndAfterStep {
+
+    public static Stream<Button> stringProviderNotPopUp() {
         return Stream.of(
-                "Форум",
-                "Тесты",
-                "Карьера",
-                "Вебинары"
-        );
-    }
-    @Step("Нажатие кнопки '{name}'")
-    public static Stream<String> stringProviderPopUp() {
-        return Stream.of(
-                "Курсы",
-                "Блог"
+                Button.EVENTS,
+                Button.TOPICS,
+                Button.TESTS,
+                Button.CAREER
         );
     }
 
+    public static Stream<Button> stringProviderPopUp() {
+        return Stream.of(
+                Button.POSTS,
+                Button.COURSES
+        );
+    }
+
+    @Description("Тесты которые проверяют функционал без Pop-UP")
     @DisplayName("Нажатие на элемент навагации")
     @ParameterizedTest(name = "{index} => Нажатие на: {0}")
     @MethodSource("stringProviderNotPopUp")
-    void checkNavigationNotPopUp(String name) {
-        new HomePage(driver)
-                .getNavigation().clickButton(name)
-                .checkNamePage(name);
-        new Header(driver)
+    public void checkNavigationNotPopUp(Button button) {
+        new TestPage(driver)
+                .openUrl()
+                .getLeftNavigation().clickButton(button)
+                .getHeader().checkNamePage(button.getText())
                 .headerSearch();
-        new Footer(driver)
-                .footerSearch();
+        new FooterBlock(driver).footerSearch();
     }
 
+    @Description("Тесты которые проверяют функционал Pop-UP")
     @DisplayName("Нажатие на элемент навагации")
     @ParameterizedTest(name = "{index} => Нажатие на: {0}")
     @MethodSource("stringProviderPopUp")
-    void checkNavigationPopUp(String name) {
-        new HomePage(driver)
-                .getNavigation().clickButton(name)
+    public void checkNavigationPopUp(Button button) {
+        new TestPage(driver)
+                .openUrl()
+                .getLeftNavigation().clickButton(button)
                 .closedPopUp()
-                .checkNamePage(name);
-        new Header(driver)
+                .getHeader().checkNamePage(button.getText())
                 .headerSearch();
-        new Footer(driver)
-                .footerSearch();
+        new FooterBlock(driver).footerSearch();
     }
-
-//    Перейти на сайт https://geekbrains.ru/courses
-//    Нажать на кнопку Курсы
-//    Проверить что страница Курсы открылась
-//    Повторить для
-//    Курсы
-//    Вебинары
-//    Форум
-//    Блог
-//    Тесты
-//    Карьера
-//    Вынести проверку каждой страницы в отдельный тест
-//    Реализовать проверку отображения блоков Header и Footer на каждой странице сайта
-//    (как минимум самого блока)
-//    (Дополнительное задание, тема следующего занятия)
-//    Cоздать классы Header и Footer в которых создать локаторы ко всем элементам в этих блоках
-
 }
-
